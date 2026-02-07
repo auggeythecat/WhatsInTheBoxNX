@@ -58,12 +58,11 @@ CFLAGS	:=	-g -O3 -ffunction-sections \
 			-DVERSION_MAJOR=${VERSION_MAJOR} \
 			-DVERSION_MINOR=${VERSION_MINOR} \
 			-DVERSION_MICRO=${VERSION_MICRO} \
-			`freetype-config --cflags` \
 			`sdl2-config --cflags`
 
 CFLAGS	+=	$(INCLUDE) -D__SWITCH__ -D_GNU_SOURCE=1
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17 -I$(DEVKITPRO)/portlibs/switch/include/freetype2
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-no-as-needed,-Map,$(notdir $*.map)
@@ -76,7 +75,7 @@ LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-no-as-needed,-M
 #			-lglad -lEGL -lglapi -ldrm_nouveau \
 #			-lavformat -lavcodec -lswresample -lswscale -lavutil -lbz2 -lass -ltheora -lvorbis -lopus\
 #			-lnx -lm -lz
-LIBS	:=	-lSDL2_ttf -lSDL2_gfx -lSDL2_image -lSDL2_mixer -lpng -ljpeg -lglad -lEGL -lglapi -ldrm_nouveau -lvorbisidec -logg -lmpg123 -lmodplug -lstdc++ -lavformat -lavcodec -lswresample -lswscale -lavutil -lbz2 -lass -ltheora -lvorbis -lopus `sdl2-config --libs` `freetype-config --libs` -lnx
+LIBS	:=	-lSDL2_ttf -lSDL2_gfx -lSDL2_image -lSDL2_mixer -lfreetype -lharfbuzz -lwebp -lpng -ljpeg -lglad -lEGL -lglapi -ldrm_nouveau -lvorbisidec -logg -lmpg123 -lmodplug -lstdc++ -lavformat -lavcodec -lswresample -lswscale -lavutil -lz -lbz2 -lass -ltheora -lvorbis -lopusfile -lopus `sdl2-config --libs` -lnx
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing

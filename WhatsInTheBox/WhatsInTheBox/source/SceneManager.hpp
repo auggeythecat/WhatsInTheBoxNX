@@ -22,6 +22,8 @@ private:
 	int m_taps;								// number of tabs
 	bool m_out;								// if we ended or not the program
 
+	PadState m_pad;
+	HidTouchScreenState m_touch;
 public:
 	static SceneManager * Instance();		// Property to get the singleton instance
 	void LoadScene(SCENES _scene);

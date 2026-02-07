@@ -102,7 +102,7 @@ int Sprite::GetFrameSize(bool _xAxis)
 		return this->m_sizePerFrameY;
 }
 
-bool Sprite::Touched(touchPosition _touch)
+bool Sprite::Touched(HidTouchState _touch)
 {
-	return (_touch.px > this->m_x && _touch.px < this->m_x + this->m_sizePerFrameX) && (_touch.py > this->m_y && _touch.py < this->m_y + this->m_sizePerFrameY);
+	return (_touch.x > this->m_x && _touch.x < this->m_x + this->m_sizePerFrameX) && (_touch.y > this->m_y && _touch.y < this->m_y + this->m_sizePerFrameY);
 }

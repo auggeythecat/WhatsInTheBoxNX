@@ -7,14 +7,15 @@
 #include "Colors.h"
 #include "Settings.h"
 #include "SceneManager.hpp"
-#include <sys\stat.h>
+#include <sys/stat.h>
 #include "Filepaths.h"
+#include "switch/services/applet.h"
 
 // Main program entrypoint
 int main(int argc, char* argv[])
 {
-	consoleInit(NULL);
-	plInitialize();
+	// consoleInit(NULL);
+	plInitialize(PlServiceType_User);
 	romfsInit();
 
 	mkdir(DATA_FOLDER, 0777);
@@ -29,7 +30,6 @@ int main(int argc, char* argv[])
 	{
 		helper->SDL_ClearScreen(BLACK);
 		helper->SDL_DrawRect(0, 0, SWITCH_SCREEN_WIDTH, SWITCH_SCREEN_HEIGHT, WHITE);
-		
 		SceneManager::Instance()->Update();
 
 		if (SceneManager::Instance()->IsOut())
@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 	romfsExit();
 	SceneManager::Instance()->Exit();
 	helper->SDL_Exit();
-	delete(helper);
+	delete(helper);	
 
 	return 0;
 }

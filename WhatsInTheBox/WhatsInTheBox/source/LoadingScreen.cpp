@@ -59,10 +59,10 @@ void LoadingScreen::Update()
 		NextScene();
 }
 
-void LoadingScreen::CheckInputs(u64 kDown, u64 kHeld)
+void LoadingScreen::CheckInputs(u64 kDown, u64 kHeld, HidTouchScreenState touch)
 {
 	// While we are in Loading Screen we DON'T need any input 
-	//if (kDown & KEY_A)
+	//if (kDown & HidNpadButton_A)
 	//	SceneManager::Instance()->SetActualScene(m_nextScene);
 }
 

@@ -93,25 +93,28 @@ void GameScreen::AddTap()
 	CheckBG();
 }
 
-void GameScreen::CheckInputs(u64 kDown, u64 kHeld)
+void GameScreen::CheckInputs(u64 kDown, u64 kHeld, HidTouchScreenState touch)
 {
-	if (kDown & KEY_A)
+	if (kDown & HidNpadButton_A)
 		AddTap();
 
-	if (kDown & KEY_TOUCH)
+	hidGetTouchScreenStates(&touch, 1);
+	bool isCurrentlyTouched = touch.count > 0;
+
+	if (isCurrentlyTouched && !m_wasTouched)
 	{
-		u32 i;
-		hidTouchRead(&touch, i);
-		if (m_player->Touched(touch))
+		if (m_player->Touched(touch.touches[0]))
 			AddTap();
 	}
 
-	if (kDown & KEY_R && kDown & KEY_L)
+	m_wasTouched = isCurrentlyTouched;
+
+	if (kDown & HidNpadButton_R && kDown & HidNpadButton_L)
 		ResetGame();
 
-	if (kDown & KEY_MINUS)
+	if (kDown & HidNpadButton_Minus)
 	{
-		if (kDown & KEY_L)
+		if (kDown & HidNpadButton_L)
 		{
 			PlayBGM();
 		}
@@ -124,7 +127,7 @@ void GameScreen::CheckInputs(u64 kDown, u64 kHeld)
 		}
 	}
 
-	if (kDown & KEY_PLUS)
+	if (kDown & HidNpadButton_Plus)
 		EndGame();
 }
 

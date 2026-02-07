@@ -1,6 +1,6 @@
 /* This file is part of Evolution Saved Me NX!
 
-Copyright (C) 2018/2019 Manuel Rodríguez Matesanz
+Copyright (C) 2018/2019 Manuel Rodrï¿½guez Matesanz
 >    This program is free software: you can redistribute it and/or modify
 >    it under the terms of the GNU General Public License as published by
 >    the Free Software Foundation, either version 3 of the License, or
@@ -109,9 +109,9 @@ void SplashScreen::NextScene()
 }
 
 // * We check the inputs
-void SplashScreen::CheckInputs(u64 kDown, u64 kHeld)
+void SplashScreen::CheckInputs(u64 kDown, u64 kHeld, HidTouchScreenState touch)
 {
-	if (kDown & KEY_A || kDown & KEY_TOUCH)
+	if (kDown & HidNpadButton_A || touch.count > 0)
 	{
 		this->m_changeScene = true;
 	}

@@ -24,6 +24,7 @@ private:
 	int m_currentBackground;
 	bool m_ended = false;
 	bool m_muted = false;
+	bool m_wasTouched = false;
 
 	std::string m_tapsStr;
 public:
@@ -32,7 +33,7 @@ public:
 	~GameScreen();										// Destructor
 	void Start(SDL_Helper * helper) override;			// initialize
 	void Draw() override;								// Draw
-	void CheckInputs(u64 kDown, u64 kHeld) override;	// CheckInput
+	void CheckInputs(u64 kDown, u64 kHeld, HidTouchScreenState touch) override;	// CheckInput
 	void Update() override;								// Update
 	void NextScene() override;
 	void AddTap();

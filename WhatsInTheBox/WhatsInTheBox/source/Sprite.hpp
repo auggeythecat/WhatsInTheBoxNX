@@ -42,6 +42,6 @@ public:
 	virtual void SetFrameSize(int _value, bool _xAxis);
 	virtual int GetFrameSize(bool _xAxis);
 
-	virtual bool Touched(touchPosition _touch);
+	virtual bool Touched(HidTouchState _touch);
 };
 #endif

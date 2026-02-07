@@ -4,6 +4,7 @@
 #include "LoadingScreen.hpp"
 #include "Colors.h"
 #include "Filepaths.h"
+#include "switch/runtime/pad.h"
 
 #include <fstream>
 #include <sstream>
@@ -24,6 +25,9 @@ void SceneManager::Start(SDL_Helper * helper)
 	this->m_helper = helper;
 	this->m_out = false;
 	this->m_taps = 0; 
+	hidInitializeTouchScreen();
+	padConfigureInput(1, HidNpadStyleSet_NpadStandard);
+	padInitializeDefault(&m_pad);
 	ReadData();
 }
 
@@ -109,15 +113,18 @@ void SceneManager::Draw()
 void SceneManager::CheckInputs()
 {
 	// Scan all the inputs. This should be done once for each frame
-	hidScanInput();
+	// hidScanInput();
 
 	// hidKeysDown returns information about which buttons have been
 	// just pressed in this frame compared to the previous one
-	u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
 	// hidKeysDown returns information about which buttons are being held
-	u64 kHeld = hidKeysHeld(CONTROLLER_P1_AUTO);
-
-	this->m_actualScene->CheckInputs(kDown, kHeld);
+	
+	padUpdate(&m_pad);
+	
+	u64 kDown = padGetButtonsDown(&m_pad);
+	u64 kHeld = padGetButtons(&m_pad);
+	
+	this->m_actualScene->CheckInputs(kDown, kHeld, m_touch);
 }
 
 void SceneManager::Exit()

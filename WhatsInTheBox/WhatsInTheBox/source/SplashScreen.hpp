@@ -1,6 +1,6 @@
 /* This file is part of Manurocker's Template!
 
-Copyright (C) 2017 Manuel Rodríguez Matesanz
+Copyright (C) 2017 Manuel Rodrï¿½guez Matesanz
 >    This program is free software: you can redistribute it and/or modify
 >    it under the terms of the GNU General Public License as published by
 >    the Free Software Foundation, either version 3 of the License, or
@@ -49,7 +49,7 @@ public:
 
 	void Start(SDL_Helper * helper) override;
 	void Draw() override;
-	void CheckInputs(u64 kDown, u64 kHeld) override;
+	void CheckInputs(u64 kDown, u64 kHeld, HidTouchScreenState touch) override;
 	void Update() override;
 	void NextScene() override;
 };
